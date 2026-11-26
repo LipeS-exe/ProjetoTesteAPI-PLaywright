@@ -1,4 +1,3 @@
-
 import { test, expect } from '@playwright/test';
 
 
@@ -6,7 +5,6 @@ test('Deve realizar login com sucesso', async ({ page }) => {
 
   // Acessa a página inicial da aplicação
   await page.goto('/');
-
   // Localiza o campo pelo placeholder Username e preenche com o usuário
   await page.getByPlaceholder('Username').fill('Admin');
 
@@ -56,9 +54,61 @@ test('Deve realizar logout com sucesso', async ({ page }) => {
   // Valida que voltou para a tela de login
   await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
 
-
 });
 
 
+test('Verificar se a tela de autenticação é apresentada corretamente.', async ({ page }) => {
+    await page.goto('/')
+
+    await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
+});
+
+test('Realizar a autenticação e verificar o redirencionamento para o Dashboard', async ({ page }) => {
+
+    await page.goto('/')
+
+    await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
+
+    await page.getByRole('textbox', { name: 'Password' }).fill('admin123')
+
+    await page.getByRole('button', { name: 'Login' }).click();
+
+    await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+});
+
+test('Verificar se o sistema apresenta uma mensagem de erro.', async ({ page }) => {
+
+    await page.goto('/')
+
+    await page.getByRole('textbox', { name: 'Username' }).fill('Admin2');
+
+    await page.getByRole('textbox', { name: 'Password' }).fill('admin321')
+
+    await page.getByRole('button', { name: 'Login' }).click();
+
+    await expect(page.getByRole('alert')).toContainText('Invalid credentials');
+});
+
+test('Verificar se os principais menus do sistemas são apresentado após o login.', async ({ page }) => {
+    await page.goto('/')
+
+    await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
+
+    await page.getByRole('textbox', { name: 'Password' }).fill('admin123')
+
+    await page.getByRole('button', { name: 'Login' }).click();
 
 
+    await expect(page.getByRole('link', { name: 'Admin' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'PIM' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Leave' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Time' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Recruitment' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'My Info' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Performance' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Directory' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Maintenance' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Claim', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Buzz' })).toBeVisible();
+})
