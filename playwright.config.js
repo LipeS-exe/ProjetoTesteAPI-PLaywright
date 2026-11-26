@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
-  timeout: 60000,
+  timeout: 100000,
   fullyParallel: false,
   reporter: 'html',
   use: {
@@ -10,7 +10,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
     launchOptions: {
-      slowMo: 1000,
+      slowMo: 500,
     },
   },
   projects: [

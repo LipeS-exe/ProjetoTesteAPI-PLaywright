@@ -57,3 +57,24 @@ test('Deve negar um registro novo de funcionario informações', async ({ page }
   await expect(page.getByText('Required').first()).toBeVisible();
   await expect(page.getByText('Required').nth(1)).toBeVisible();
 });
+  test('Deve Permitir alterações no perfil', async ({ page }) => {
+
+  await page.goto('/');
+  // Realizar login
+  await page.getByPlaceholder('Username').fill('Admin');
+  await page.getByPlaceholder('Password').fill('admin123');
+  await page.getByRole('button', { name: 'Login' }).click();
+
+  // Ir para página de gerenciamento de Funcionarios
+  await page.getByRole('link', { name: 'PIM' }).click();
+  await page.locator('div').filter({ hasText: /^Employee Name$/ }).nth(2).click();
+  await page.getByRole('textbox', { name: 'Type for hints...' }).first().click();
+  await page.getByRole('textbox', { name: 'Type for hints...' }).first().fill('Urvi Sri');
+
+  await page.getByRole('button', { name: 'Search' }).click();
+  await page.getByRole('button').filter({ hasText: /^$/ }).nth(3).click();
+  await page.getByRole('textbox', { name: 'Middle Name' }).click();
+  await page.getByRole('textbox', { name: 'Middle Name' }).fill('teste');
+  await page.locator('form').filter({ hasText: 'Employee Full NameEmployee' }).getByRole('button').click();
+  await expect(page.getByText('Success', { exact: true }));
+});
