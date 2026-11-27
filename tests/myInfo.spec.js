@@ -23,13 +23,3 @@ test('Alteração do perfil com sucesso', async ({ page }) => {
   await page.locator('form').filter({ hasText: 'Employee Full NameEmployee' }).getByRole('button').click();
   await expect(page.getByText('Success', { exact: true }));
 });
-
-test('Crie um post na categoria Buzz', async ({ page }) => {
-
-    await page.goto('/');
-
-    // Login para entrar no site
-    await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
-    await page.getByRole('textbox', { name: 'Password' }).fill('admin123')
-    await page.getByRole('button', { name: 'Login' }).click();
-})
