@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('Alteração do perfil com sucesso', async ({ page }) => {
     await page.goto("/")
+    
 
     // Realizar login
   await page.getByPlaceholder('Username').fill('Admin');

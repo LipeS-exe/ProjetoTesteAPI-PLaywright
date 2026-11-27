@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Envio de horas trabalhadas', async ({ page }) => {
   // Acessa a página inicial da aplicação
   await page.goto('/');
+  await page.pause();
 
   // Realizar login
   await page.getByPlaceholder('Username').fill('Admin');
