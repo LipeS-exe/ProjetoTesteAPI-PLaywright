@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test('Verificar se os principais menus do sistemas são apresentado após o login.', async ({ page }) => {
     await page.goto('/')
-    await page.pause();
 
     await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
 

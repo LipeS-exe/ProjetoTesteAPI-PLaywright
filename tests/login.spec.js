@@ -5,7 +5,7 @@ test('Deve realizar login com sucesso', async ({ page }) => {
 
   // Acessa a página inicial da aplicação
   await page.goto('/');
-  await page.pause();
+  
   // Localiza o campo pelo placeholder Username e preenche com o usuário
   await page.getByPlaceholder('Username').fill('Admin');
 

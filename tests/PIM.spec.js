@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 test('Deve registrar um novo funcionario com sucesso', async ({ page }) => {
 
   await page.goto('/');
-  await page.pause();
+
   // Realizar login
   await page.getByPlaceholder('Username').fill('Admin');
   await page.getByPlaceholder('Password').fill('admin123');

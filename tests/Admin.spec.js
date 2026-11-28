@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('verificar se é possível acessar a área de Admin.', async ({ page }) => {
     await page.goto('/');
-    
+
     // Login para entrar no site
     await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
     await page.getByRole('textbox', { name: 'Password' }).fill('admin123')
